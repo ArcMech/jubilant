@@ -8,9 +8,13 @@ This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes th
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
+**Apps:**
+- `api`: an [Express.js](https://expressjs.com/) app, running on port 8080
+- `web`: a [Next.js](https://nextjs.org/) app
+
+**Packages:**
 - `ui`: a stub React component library shared by both `web` and `docs` applications
+- `database`: ORM prisma with implemented prisma studio on port 5555 (available on pnpm dev command)
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
@@ -35,11 +39,12 @@ pnpm run build
 
 ### Develop
 
-To develop all apps and packages, run the following command:
+To develop all apps and packages, run the following command on the root:
 
 ```
-cd my-turborepo
-pnpm run dev
+pnpm i
+pnpm db:generate
+pnpm run dev /or/ pnpm dev
 ```
 
 ### Remote Caching
