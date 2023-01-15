@@ -1,8 +1,14 @@
 import express from "express";
+import { getMe } from "./services";
+import bodyParser from "body-parser";
+import cors from "cors";
 import path from "path";
 const app = express();
 const port = 8080;
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
@@ -11,7 +17,11 @@ app.get("/", (req, res) => {
     projects: [
       {
         name: "DataProject",
-        tasks: [],
+        tasks: [
+          {
+            name: "Implement Data feature",
+          },
+        ],
       },
       {
         name: "PepeProject",
@@ -23,6 +33,11 @@ app.get("/", (req, res) => {
       },
     ],
   });
+});
+
+app.post("/everhour", async (req, res) => {
+  const result = await getMe(req.body.apiKey);
+  res.send(result);
 });
 
 // Need to think about passing data through request
