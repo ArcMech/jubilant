@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protokół</title>
+  <style>
+    body {
+      background: rgb(204, 204, 204);
+      font-family: Arial;
+      font-size: 0.9rem;
+      margin: auto;
+    }
+
+    page {
+      background: white;
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 0.5cm;
+
+    }
+
+    page[size="A4"] {
+      width: 21cm;
+      min-height: 29.7cm;
+      padding: 2.97cm 2.1cm;
+      box-sizing: border-box
+    }
+
+    page[size="A4"][layout="landscape"] {
+      width: 29.7cm;
+      height: 21cm;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .small {
+      font-size: 0.7rem;
+    }
+
+    .table {
+      width: 100%;
+      background-color: #FFFFFF;
+      border-collapse: collapse;
+      border-width: 1px;
+      border-color: #000000;
+      border-style: solid;
+      color: #000000;
+      break-before: avoid;
+    }
+
+    table.table td,
+    table.table th {
+      border-width: 1px;
+      border-color: #000000;
+      border-style: solid;
+      padding: 8px;
+    }
+
+    .bottom-space {
+      margin-bottom: 0.3rem;
+    }
+
+    .project-list li {
+      margin-bottom: 0.1rem;
+    }
+
+    .project-list li:last-child {
+      margin-bottom: 0px;
+    }
+
+    @media print {
+
+      body,
+      page {
+        margin: 0;
+        box-shadow: 0;
+      }
+
+      table tr td,
+      table.print-friendly tr th {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <page size="A4">
+    <p class='center'>OŚWIADCZENIE - PROTOKÓŁ ZDAWCZO ODBIORCZY </br>sporządzony przez strony dnia 30.11.2022 </br>
+      DO UMOWY Nr X / XX / 2019 Z DNIA XX.XX.XXXX. <br />
+      pomiędzy:
+    </p>
+    <p class='small'><b>X spółka z ograniczoną odpowiedzialnością </b>z siedzibą w X, ul. NAZWA NUMER, XX-XXX Miasto, NIP: XXXXXXXXX, REGON: XXXXXXXXX, zarejestrowaną przez Sąd Rejonowy w Mieście, Wydział VIII Gospodarczy - KRS pod numerem XXXXXXXXX, reprezentowaną przez <b>IMIĘ NAZWISKO</b> – Prezesa Zarządu, zwaną dalej Zleceniodawcą, <br /> a </br>
+      Panem <%= name %> przedsiębiorcą działającym pod nazwą NAZWA FIRMY, z siedzibą w MIASTO (kod: XX-XXX) przy ulicy ul. NAZWA NUMER, wpisanym do Centralnej Ewidencji i Informacji o Działalności Gospodarczej, posiadającym numer NIP: XXXXXXXXX i REGON: XXXXXXXX, zwanym dalej Zleceniobiorcą, <br /> Zwanymi dalej również łącznie „Stronami” lub osobno „Stroną”
+    </p>
+    <p>1. Strony zgodnie stwierdzają, że w dniu sporządzenia niniejszego oświadczenia Zleceniobiorca przekazał Zleceniodawcy rezultat prac zgodnie z rzeczoną umową, polegających na wykonaniu następujących elementów programów komputerowych, projektów, prototypów i dokumentacji lub ich fragmentów, o charakterze utworów w rozumieniu ustawy z dnia 4 lutego 1994r. o prawie autorskim i prawach pokrewnych (tekst jednolity: Dz.U.2016.666 z dnia 2016.05.16 z póżn. zm.), który to rezultat prac obejmuje wszystkie wykonane przez Zleceniobiorcę na zamówienie Zleceniodawcy utwory w okresie: od 01.11.2022 do 30.11.2022, to jest:</p>
+    <ul>
+      <% projects.forEach(function(project){ %>
+      <li class="bottom-space">
+        <%= project.name %>
+      </li>
+      <ul class="project-list">
+        <% project.tasks.forEach(function(task) { %>
+        <li> <%= task.name %></li>
+        <% }); %>
+      </ul>
+      </br>
+      <% }); %>
+    </ul>
+    <p>
+      2. Zleceniobiorca potwierdza przeniesienie na Zleceniodawcę praw autorskich do utworów wyszczególnionych powyżej na zasadach ujętych w rzeczonej umowie. Zleceniobiorca oświadcza, że na chwilę przekazania rezultatów prac nie są mu znane żadne ich wady, a zamówienie zrealizował w sposób kompletny i prawidłowy. Zleceniodawca przyjmuje rezultaty prac opisanych w punkcie 1. powyżej bez zastrzeżeń.
+    </p>
+    <p>3. Tym samym Zleceniobiorca potwierdza, że przekazał Zleceniodawcy wszystkie prawa autorskie majątkowe do utworów, co do których był zobowiązany do ich przekazania Zleceniodawcy zgodnie z rzeczoną umową, począwszy od dnia obowiązywania umowy. </p>
+    <p>4. Uzgodnione przez strony wynagrodzenie należne Zleceniobiorcy wynosi:
+      <b>10 000 złotych netto</b> (kwota należna za dany okres rozliczeniowy), i należne jest Zleceniobiorcy za zrealizowane prace oraz za przeniesienie praw autorskich do utworów na wszystkich polach eksploatacji wynikających z rzeczonej umowy.
+    </p>
+    <p>
+      5. Niniejszy protokół został sporządzony w dwóch jednobrzmiących egzemplarzach, po jednym dla każdej ze stron oraz stanowi dokument towarzyszący rzeczonej umowie.
+      Protokół sporządzili i podpisali:
+    </p>
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Po stronie Zleceniobiorcy: <br /><br /><br /><br /><br />……………………………<br />IMIĘ NAZWISKO</td>
+          <td>Po stronie Zleceniodawcy: <br /><br /><br /><br /><br />……………………………<br />IMIĘ NAZWISKO</td>
+        </tr>
+      </tbody>
+    </table>
+  </page>
+
+
+</body>
+
+</html>
