@@ -1,10 +1,13 @@
-import express from "express";
+import express, { Request } from "express";
 import ejs from "ejs";
 import puppeteer from "puppeteer";
 import { getMe } from "./services";
 import bodyParser from "body-parser";
 import cors from "cors";
 import path from "path";
+
+const userRouter = require("./routes/user");
+
 const app = express();
 const port = 8080;
 
@@ -12,6 +15,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.set("view engine", "ejs");
+
+app.use("/users", userRouter);
 
 // @todo Move it to helpers/services
 const makeIt = async ({
@@ -48,19 +53,22 @@ const makeIt = async ({
   await browser.close();
 };
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res) => {
   res.send("Hello Jubilate");
 });
 
 app.get("/protocole", async (req, res) => {
   await makeIt({
-    name: "Jane Doe",
+    name: "Sebastian K",
     projects: [
       {
-        name: "DataProject",
+        name: "Terminal",
         tasks: [
           {
             name: "Implement Data feature",
+          },
+          {
+            name: "Super Implement Data feature",
           },
         ],
       },
