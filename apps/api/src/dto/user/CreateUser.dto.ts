@@ -1,7 +1,7 @@
-export class CreateUserDto {
+export type CreateUserDto = {
   email: string;
   first_name: string;
   last_name: string;
   password: string;
   token: string;
-}
+};
