@@ -11,6 +11,33 @@ userRouter.get("/", async (_, res) => {
   res.send(users);
 });
 
+userRouter.get(
+  "/:userId/",
+  async (req: { params: { userId: string } }, res) => {
+    const userId = Number(req.params.userId);
+
+    if (typeof userId !== "number") {
+      res.status(400).send({ error: "UserId should be a number" });
+      return;
+    }
+
+    try {
+      const user = await client.user.findUnique({
+        where: {
+          id: userId,
+        },
+      });
+      res.status(200).send(user);
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientValidationError) {
+        res.status(400).send({ error: e.message });
+      }
+
+      res.status(400).send({ error: "Bad Request" });
+    }
+  }
+);
+
 userRouter.post(
   "/",
   async (
