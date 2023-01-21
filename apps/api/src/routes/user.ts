@@ -60,4 +60,33 @@ userRouter.patch(
   }
 );
 
+userRouter.delete(
+  "/:userId/",
+  async (req: { params: { userId: string } }, res) => {
+    const userId = Number(req.params.userId);
+
+    if (typeof userId !== "number") {
+      res.status(400).send({ error: "UserId should be a number" });
+      return;
+    }
+
+    try {
+      await client.user.delete({
+        where: {
+          id: userId,
+        },
+      });
+      res
+        .status(200)
+        .send({ message: `User id: ${userId} has been successfully deleted` });
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientValidationError) {
+        res.status(400).send({ error: e.message });
+      }
+
+      res.status(400).send({ error: "Bad Request" });
+    }
+  }
+);
+
 module.exports = userRouter;
